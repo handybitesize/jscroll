@@ -38,7 +38,9 @@
 
         // Private vars and methods
         var _data = $e.data('jscroll'),
-            _userOptions = (typeof options === 'function') ? { callback: options } : options,
+            _userOptions = (typeof options === 'function') ? {
+                callback: options
+            } : options,
             _options = $.extend({}, $.jscroll.defaults, _userOptions, _data || {}),
             _isWindow = ($e.css('overflow-y') === 'visible'),
             _$next = $e.find(_options.nextSelector).first(),
@@ -152,7 +154,9 @@
                     .children('.jscroll-added').last()
                     .html('<div class="jscroll-loading">' + _options.loadingHtml + '</div>');
 
-                return $e.animate({scrollTop: $inner.outerHeight()}, 0, function() {
+                return $e.animate({
+                    scrollTop: $inner.outerHeight()
+                }, 0, function() {
                     $inner.find('div.jscroll-added').last().load(data.nextHref, function(r, status) {
                         if (status === 'error') {
                             return _destroy();
@@ -187,17 +191,28 @@
                         console[m].apply(console, Array.prototype.slice.call(arguments, 1));
                     }
                 }
+            },
+
+            _setTrigger = function(t) {
+                _debug('info', 'Setting autoTrigger to ' + t);
+                _options.autoTrigger = t;
+                _setBindings();
             };
 
         // Initialization
-        $e.data('jscroll', $.extend({}, _data, {initialized: true, waiting: false, nextHref: _nextHref}));
+        $e.data('jscroll', $.extend({}, _data, {
+            initialized: true,
+            waiting: false,
+            nextHref: _nextHref
+        }));
         _wrapInnerContent();
         _preloadImage();
         _setBindings();
 
         // Expose API methods via the jQuery.jscroll namespace, e.g. $('sel').jscroll.method()
         $.extend($e.jscroll, {
-            destroy: _destroy
+            destroy: _destroy,
+            setTrigger: _setTrigger
         });
         return $e;
     };
@@ -206,7 +221,8 @@
     $.fn.jscroll = function(m) {
         return this.each(function() {
             var $this = $(this),
-                data = $this.data('jscroll'), jscroll;
+                data = $this.data('jscroll'),
+                jscroll;
 
             // Instantiate jScroll on this element if it hasn't been already
             if (data && data.initialized) {
