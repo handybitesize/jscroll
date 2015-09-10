@@ -48,6 +48,11 @@ $('.jscroll').jscroll({
 
 For more information on the `contentSelector` option and how it loads a response fragment, see the [jQuery documentation for the .load() method](http://api.jquery.com/load/).
 
+## API
+
+* `destroy` - Destroys the instance.
+* `setTrigger( bool )` - Sets the autoTrigger to `bool` and rebinds.
+
 ## Contributing
 
 In lieu of a formal styleguide, take care to maintain the existing coding style. Add unit tests for any new or changed functionality. Lint and test your code using [grunt](http://gruntjs.com).
